@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Directors | AMAF</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primaryGreen: '#22c55e',
+            primaryBlue: '#2563eb',
+            darkBase: '#0f172a',
+          },
+          boxShadow: {
+            soft: '0 8px 30px rgba(15, 23, 42, 0.08)',
+            lift: '0 16px 40px rgba(15, 23, 42, 0.12)',
+          },
+        },
+      },
+    };
+  </script>
+</head>
+
+<body class="bg-slate-100 text-slate-900 min-h-screen">
+  <!-- Top Bar -->
+  <header class="bg-darkBase sticky top-0 z-30  backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="text-2xl font-extrabold text-white">AMAF</div>
+      <div class="flex items-center gap-3">
+        <a href="index.html#directors" class="text-slate-700 text-white hover:text-blue-700 font-semibold">← Home</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-12">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+      <div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-darkBase">Board of Directors & Officers</h1>
+        <p class="text-slate-600 mt-2 max-w-2xl">
+          Full leadership list. Roles and responsibilities are presented for transparency and clarity.
+        </p>
+      </div>
+
+      <!-- Optional: Quick filter -->
+      <div class="flex items-center gap-2">
+        <input
+          id="search"
+          type="text"
+          placeholder="Search name or role..."
+          class="w-full sm:w-72 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-soft focus:outline-none focus:ring-4 focus:ring-primaryBlue/10"
+        />
+      </div>
+    </div>
+
+    <div id="cards" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 text-sm"></div>
+
+          <!-- Impact / Stats + FAQ -->
+      <section id="impact" class="mt-10 py-14 bg-white rounded-2xl">
+        <div class="max-w-6xl mx-auto px-4">
+          <div class="fade-up">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-darkBase">
+              Our Impact Focus
+            </h2>
+            <p class="text-slate-600 mt-2 max-w-3xl leading-relaxed">
+              We measure success through student progress, confidence, and
+              long-term outcomes—not only awards.
+            </p>
+          </div>
+
+          <div class="fade-up mt-8 grid gap-6 lg:grid-cols-3">
+            <div
+              class="bg-gradient-to-br from-green-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div class="text-3xl font-extrabold text-darkBase">Support</div>
+              <div class="text-sm text-slate-600 mt-1">
+                Funding + mentoring + workshops.
+              </div>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-blue-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div class="text-3xl font-extrabold text-darkBase">Guidance</div>
+              <div class="text-sm text-slate-600 mt-1">
+                Clear steps and strong accountability.
+              </div>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div class="text-3xl font-extrabold text-darkBase">Community</div>
+              <div class="text-sm text-slate-600 mt-1">
+                A network that keeps students moving forward.
+              </div>
+            </div>
+          </div>
+
+          <div class="fade-up mt-8 grid gap-6 lg:grid-cols-2">
+            <!-- FAQ -->
+            <div
+              class="bg-slate-50 border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift transition"
+            >
+              <h3 class="text-xl font-extrabold text-darkBase">Quick FAQ</h3>
+              <div class="mt-4 space-y-3 text-sm">
+                <details
+                  class="group bg-white border border-slate-200 rounded-2xl p-4 shadow-soft"
+                >
+                  <summary
+                    class="cursor-pointer font-semibold text-darkBase flex items-center justify-between"
+                  >
+                    Who can apply?
+                    <span
+                      class="text-slate-400 group-open:rotate-180 transition"
+                      >⌄</span
+                    >
+                  </summary>
+                  <p class="text-slate-600 mt-2 leading-relaxed">
+                    Students in the Class of 2026 who meet eligibility
+                    requirements listed on the application page.
+                  </p>
+                </details>
+
+                <details
+                  class="group bg-white border border-slate-200 rounded-2xl p-4 shadow-soft"
+                >
+                  <summary
+                    class="cursor-pointer font-semibold text-darkBase flex items-center justify-between"
+                  >
+                    What documents are needed?
+                    <span
+                      class="text-slate-400 group-open:rotate-180 transition"
+                      >⌄</span
+                    >
+                  </summary>
+                  <p class="text-slate-600 mt-2 leading-relaxed">
+                    Typically: application form, personal statement, transcript
+                    (or grades), and one recommendation.
+                  </p>
+                </details>
+
+                <details
+                  class="group bg-white border border-slate-200 rounded-2xl p-4 shadow-soft"
+                >
+                  <summary
+                    class="cursor-pointer font-semibold text-darkBase flex items-center justify-between"
+                  >
+                    How are recipients selected?
+                    <span
+                      class="text-slate-400 group-open:rotate-180 transition"
+                      >⌄</span
+                    >
+                  </summary>
+                  <p class="text-slate-600 mt-2 leading-relaxed">
+                    A review panel uses a rubric scoring academics, need,
+                    leadership, service, and goals.
+                  </p>
+                </details>
+              </div>
+            </div>
+
+            <!-- CTA -->
+            <div
+              class="bg-gradient-to-br from-darkBase to-slate-900 border border-white/10 rounded-3xl p-6 shadow-lift text-white relative overflow-hidden"
+            >
+              <div
+                class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-primaryBlue/20 blur-3xl"
+              ></div>
+              <div
+                class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-primaryGreen/20 blur-3xl"
+              ></div>
+
+              <h3 class="text-xl font-extrabold">Ready to Apply?</h3>
+              <p class="text-white/75 mt-2 leading-relaxed">
+                Start your scholarship application and upload the required form.
+                If you need help, contact us—we respond quickly.
+              </p>
+
+              <div class="mt-5 flex flex-col sm:flex-row gap-3">
+                <a
+                  href="apply.html"
+                  class="inline-flex items-center justify-center gap-2 bg-primaryGreen text-darkBase font-semibold px-6 py-3 rounded-full shadow-soft hover:shadow-glowG hover:bg-emerald-500 transition"
+                >
+                  Apply Now <span>→</span>
+                </a>
+                <a
+                  href="#contact"
+                  class="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/15 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/15 transition"
+                >
+                  Contact Us
+                </a>
+              </div>
+
+              <div class="mt-5 text-xs text-white/60">
+                Tip: Use a strong personal statement—your goals, challenges, and
+                impact matter.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="py-14 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4">
+          <div class="fade-up">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-darkBase">
+              Contact Information
+            </h2>
+            <p class="text-slate-600 mt-2 max-w-2xl">
+              Reach out for application help, eligibility questions, or
+              partnership opportunities.
+            </p>
+          </div>
+
+          <div class="fade-up mt-8 grid gap-6 md:grid-cols-3 text-sm">
+            <div
+              class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <h3 class="font-extrabold text-darkBase mb-2">Mailing Address</h3>
+              <p class="text-slate-700 leading-relaxed">
+                Future Scholars Foundation<br />
+                123 Greenway Avenue<br />
+                Springfield, USA
+              </p>
+            </div>
+
+            <div
+              class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <h3 class="font-extrabold text-darkBase mb-2">Email & Phone</h3>
+              <p class="text-slate-700">
+                Email:
+                <a
+                  href="mailto:info@futurescholars2026.org"
+                  class="text-primaryBlue font-semibold hover:underline"
+                >
+                  info@futurescholars2026.org
+                </a>
+              </p>
+              <p class="text-slate-700 mt-2">
+                Phone:
+                <a
+                  href="tel:+11234567890"
+                  class="text-primaryBlue font-semibold hover:underline"
+                >
+                  +1 (123) 456-7890
+                </a>
+              </p>
+
+              <div
+                class="mt-4 p-4 rounded-2xl bg-slate-50 border border-slate-200"
+              >
+                <div class="font-semibold text-darkBase">Response Time</div>
+                <div class="text-slate-600 text-xs mt-1">
+                  Usually within 24–48 hours (business days).
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <h3 class="font-extrabold text-darkBase mb-2">Office Hours</h3>
+              <p class="text-slate-700 leading-relaxed">
+                Monday – Friday: 9:00 AM – 5:00 PM<br />
+                Closed on weekends and holidays
+              </p>
+              <div class="mt-4 flex gap-2">
+                <a
+                  href="#"
+                  class="flex-1 text-center px-4 py-2 rounded-full bg-primaryBlue text-white font-semibold shadow-soft hover:bg-blue-700 hover:shadow-glowB transition"
+                >
+                  Directions
+                </a>
+                <a
+                  href="apply.html"
+                  class="flex-1 text-center px-4 py-2 rounded-full bg-primaryGreen text-darkBase font-semibold shadow-soft hover:bg-emerald-500 hover:shadow-glowG transition"
+                >
+                  Apply
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Back to top button -->
+    <button
+      id="backToTop"
+      class="hidden fixed bottom-5 right-5 bg-primaryBlue text-white rounded-full px-4 py-2 text-sm shadow-lift hover:bg-blue-700 hover:-translate-y-0.5 transition"
+      aria-label="Back to top"
+    >
+      ↑ Top
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-darkBase text-slate-300 text-xs py-6">
+      <div class="max-w-6xl mx-auto px-4 text-center space-y-2">
+        <p class="text-white/70">
+          &copy; <span id="year"></span> Future Scholars Foundation. All rights
+          reserved.
+        </p>
+        <p class="text-white/45">
+          Built to support students with access, guidance, and opportunity.
+        </p>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const people = [
+      { name: "Mohammad Osman Chowdhury", role: "President", initials: "MO", tone: "blue",
+        desc: "Provides overall leadership, governance direction, and strategic oversight for AMAF.",
+        tags: ["Governance", "Strategy"] },
+
+      { name: "Shakir Ahmed", role: "Vice President", initials: "SA", tone: "green",
+        desc: "Supports organizational leadership and helps coordinate board priorities and initiatives.",
+        tags: ["Operations", "Board Support"] },
+
+      { name: "Mohammad Shamim Al Razin", role: "Vice President", initials: "MS", tone: "slate",
+        desc: "Strengthens governance, community engagement, and supports program execution with the team.",
+        tags: ["Community", "Leadership"] },
+
+      { name: "Imran Aziz", role: "Gen. Secretary", initials: "IA", tone: "blue",
+        desc: "Maintains records, meeting minutes, and coordination across board communications.",
+        tags: ["Documentation", "Coordination"] },
+
+      { name: "Mohammad Jamaluddin", role: "Treasurer", initials: "MJ", tone: "green",
+        desc: "Oversees financial stewardship, reporting, and responsible budgeting for scholarship impact.",
+        tags: ["Finance", "Accountability"] },
+
+      { name: "Nazma Akhter", role: "Women Affairs Secretary", initials: "NA", tone: "slate",
+        desc: "Leads women-focused initiatives, inclusion, and outreach to broaden community participation.",
+        tags: ["Inclusion", "Outreach"] },
+
+      { name: "Mohammad Baten", role: "Public Affairs Secretary", initials: "MB", tone: "blue",
+        desc: "Manages public communications, community relations, and external coordination.",
+        tags: ["Public Relations", "Outreach"] },
+
+      { name: "Mohammad M Rahman Munna", role: "Director", initials: "MR", tone: "green",
+        desc: "Supports governance and helps guide program planning and organizational decisions.",
+        tags: ["Board Service", "Programs"] },
+
+      { name: "Shehab C. Sumon", role: "Director", initials: "SS", tone: "slate",
+        desc: "Contributes to strategic planning and community engagement initiatives.",
+        tags: ["Strategy", "Community"] },
+
+      { name: "Fakher Uddin Mustafa", role: "Director", initials: "FM", tone: "blue",
+        desc: "Supports scholarship initiatives and operational improvement efforts.",
+        tags: ["Operations", "Impact"] },
+
+      { name: "Mustafa Jamal Rana", role: "Director", initials: "MR", tone: "green",
+        desc: "Helps guide program oversight and long-term planning.",
+        tags: ["Planning", "Programs"] },
+
+      { name: "Zobaer Abedin", role: "Director", initials: "ZA", tone: "slate",
+        desc: "Supports governance, policy, and community collaboration.",
+        tags: ["Governance", "Collaboration"] },
+
+      { name: "Shamim Razin", role: "Director", initials: "SR", tone: "blue",
+        desc: "Assists with program direction and outreach activities.",
+        tags: ["Outreach", "Programs"] },
+
+      { name: "M. Rahman", role: "Director", initials: "MR", tone: "green",
+        desc: "Contributes to board decisions and organizational stewardship.",
+        tags: ["Stewardship", "Board Service"] },
+
+      { name: "Firzoaq Malik", role: "Director", initials: "FM", tone: "slate",
+        desc: "Supports scholarship planning and organizational growth.",
+        tags: ["Growth", "Impact"] },
+
+      { name: "Mohammad Awan Parvaez", role: "Director", initials: "MA", tone: "blue",
+        desc: "Contributes to governance and program execution support.",
+        tags: ["Governance", "Support"] },
+    ];
+
+    function badgeTone(tone) {
+      if (tone === "green") {
+        return {
+          wrap: "bg-primaryGreen/10 border-primaryGreen/20 text-emerald-600",
+        };
+      }
+      if (tone === "slate") {
+        return {
+          wrap: "bg-slate-900/10 border-slate-900/15 text-slate-800",
+        };
+      }
+      return {
+        wrap: "bg-primaryBlue/10 border-primaryBlue/20 text-primaryBlue",
+      };
+    }
+
+    function makeCard(p) {
+      const t = badgeTone(p.tone);
+      return `
+        <div class="group bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-2xl border grid place-items-center font-bold ${t.wrap}">
+              ${p.initials}
+            </div>
+            <div class="flex-1">
+              <h3 class="font-extrabold text-darkBase">${p.name}</h3>
+              <p class="text-primaryBlue text-xs font-semibold">${p.role}</p>
+            </div>
+          </div>
+          <p class="text-slate-600 mt-3 leading-relaxed">${p.desc}</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            ${p.tags.map(tag => `
+              <span class="text-xs px-2.5 py-1 rounded-full bg-white border border-slate-200 text-slate-700">
+                ${tag}
+              </span>
+            `).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    const cardsEl = document.getElementById("cards");
+    const searchEl = document.getElementById("search");
+
+    function render(list) {
+      cardsEl.innerHTML = list.map(makeCard).join("");
+    }
+
+    render(people);
+
+    searchEl.addEventListener("input", (e) => {
+      const q = e.target.value.trim().toLowerCase();
+      const filtered = people.filter(p =>
+        p.name.toLowerCase().includes(q) || p.role.toLowerCase().includes(q)
+      );
+      render(filtered);
+    });
+  </script>
+</body>
+</html>

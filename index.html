@@ -1,688 +1,1233 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Future Scholars Foundation</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Future Scholars Foundation</title>
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primaryGreen: '#22c55e',
-            primaryBlue: '#2563eb',
-            darkBase: '#0f172a',
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primaryGreen: "#22c55e",
+              primaryBlue: "#2563eb",
+              darkBase: "#0f172a",
+            },
+            boxShadow: {
+              soft: "0 10px 30px rgba(2, 6, 23, 0.10)",
+              lift: "0 18px 45px rgba(2, 6, 23, 0.18)",
+              glowG: "0 18px 60px rgba(34, 197, 94, 0.25)",
+              glowB: "0 18px 60px rgba(37, 99, 235, 0.22)",
+            },
           },
-          boxShadow: {
-            soft: "0 10px 30px rgba(2, 6, 23, 0.10)",
-            lift: "0 18px 45px rgba(2, 6, 23, 0.18)",
-            glowG: "0 18px 60px rgba(34, 197, 94, 0.25)",
-            glowB: "0 18px 60px rgba(37, 99, 235, 0.22)",
-          }
         },
-      },
-    };
-  </script>
+      };
+    </script>
 
-  <style>
-    /* Smooth scroll + selection */
-    html { scroll-behavior: smooth; }
-    ::selection { background: rgba(34,197,94,.25); }
+    <style>
+      /* Smooth scroll + selection */
+      html {
+        scroll-behavior: smooth;
+      }
+      ::selection {
+        background: rgba(34, 197, 94, 0.25);
+      }
 
-    /* Soft animated blob background */
-    .blob {
-      filter: blur(55px);
-      opacity: .55;
-      animation: floaty 10s ease-in-out infinite;
-    }
-    @keyframes floaty {
-      0%, 100% { transform: translate(0,0) scale(1); }
-      50% { transform: translate(12px,-14px) scale(1.05); }
-    }
+      /* Soft animated blob background */
+      .blob {
+        filter: blur(55px);
+        opacity: 0.55;
+        animation: floaty 10s ease-in-out infinite;
+      }
+      @keyframes floaty {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(12px, -14px) scale(1.05);
+        }
+      }
 
-    /* Subtle fade up */
-    .fade-up { opacity: 0; transform: translateY(14px); }
-    .fade-up.show { opacity: 1; transform: translateY(0); transition: 700ms ease; }
-  </style>
-</head>
+      /* Subtle fade up */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      .fade-up.show {
+        opacity: 1;
+        transform: translateY(0);
+        transition: 700ms ease;
+      }
+    </style>
+  </head>
 
-<body class="bg-slate-100 text-slate-900 flex flex-col min-h-screen">
-
-  <!-- Header -->
-  <header class="sticky top-0 z-30 bg-gradient-to-r from-teal-800 via-slate-900 to-primaryBlue text-white shadow">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="#" class="flex items-center gap-3 group">
-        <div class="w-9 h-9 rounded-xl bg-white/10 border border-white/15 grid place-items-center shadow-soft group-hover:shadow-glowB transition">
-          <span class="text-lg">🎓</span>
-        </div>
-        <div class="leading-tight">
-          <div class="font-semibold text-sm sm:text-base tracking-wide">
-            Future Scholars Foundation
+  <body class="bg-slate-100 text-slate-900 flex flex-col min-h-screen">
+    <!-- Header -->
+    <header
+      class="sticky top-0 z-30 bg-gradient-to-r from-teal-800 via-slate-900 to-primaryBlue text-white shadow"
+    >
+      <div
+        class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between"
+      >
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div
+            class="w-9 h-9 rounded-xl bg-white/10 border border-white/15 grid place-items-center shadow-soft group-hover:shadow-glowB transition"
+          >
+            <span class="text-lg">🎓</span>
           </div>
-          <div class="text-[11px] text-white/70">
-            Scholarships • Mentoring • Class of 2026
+          <div class="leading-tight">
+            <div class="font-semibold text-sm sm:text-base tracking-wide">
+              American Muslim Alliance of Florida
+            </div>
+            <div class="text-[11px] text-white/70">
+              Scholarships • Mentoring • Career Guidence
+            </div>
           </div>
-        </div>
-      </a>
-
-      <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-2 text-sm">
-        <a href="#mission" class="px-3 py-1.5 rounded-full hover:bg-white/10 transition">Mission</a>
-        <a href="#directors" class="px-3 py-1.5 rounded-full hover:bg-white/10 transition">Directors</a>
-        <a href="#about" class="px-3 py-1.5 rounded-full hover:bg-white/10 transition">About</a>
-        <a href="#impact" class="px-3 py-1.5 rounded-full hover:bg-white/10 transition">Impact</a>
-        <a href="#contact" class="px-3 py-1.5 rounded-full hover:bg-white/10 transition">Contact</a>
-        <a href="apply.html"
-           class="ml-2 px-4 py-1.5 rounded-full bg-primaryGreen text-darkBase font-semibold shadow-soft hover:shadow-glowG hover:bg-emerald-500 transition">
-          Apply
         </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-2 text-sm">
+          <a
+            href="#mission"
+            class="px-3 py-1.5 rounded-full hover:bg-white/10 transition"
+            >Mission</a
+          >
+          <a
+            href="#directors"
+            class="px-3 py-1.5 rounded-full hover:bg-white/10 transition"
+            >Directors</a
+          >
+          <a
+            href="#about"
+            class="px-3 py-1.5 rounded-full hover:bg-white/10 transition"
+            >About</a
+          >
+          <a
+            href="#impact"
+            class="px-3 py-1.5 rounded-full hover:bg-white/10 transition"
+            >Impact</a
+          >
+          <a
+            href="#contact"
+            class="px-3 py-1.5 rounded-full hover:bg-white/10 transition"
+            >Contact</a
+          >
+          <a
+            href="apply.html"
+            class="ml-2 px-4 py-1.5 rounded-full bg-primaryGreen text-darkBase font-semibold shadow-soft hover:shadow-glowG hover:bg-emerald-500 transition"
+          >
+            Apply
+          </a>
+        </nav>
+
+        <!-- Mobile Nav Button -->
+        <button
+          id="navToggle"
+          class="md:hidden border border-white/20 px-3 py-1.5 rounded-lg text-lg hover:bg-white/10 transition"
+          aria-label="Open Menu"
+        >
+          ☰
+        </button>
+      </div>
+
+      <!-- Mobile Nav Menu -->
+      <nav id="mobileNav" class="md:hidden hidden border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-1 text-sm">
+          <a
+            href="#mission"
+            class="px-3 py-2 rounded-lg hover:bg-white/10 transition"
+            >Mission</a
+          >
+          <a
+            href="#directors"
+            class="px-3 py-2 rounded-lg hover:bg-white/10 transition"
+            >Directors</a
+          >
+          <a
+            href="#about"
+            class="px-3 py-2 rounded-lg hover:bg-white/10 transition"
+            >About</a
+          >
+          <a
+            href="#impact"
+            class="px-3 py-2 rounded-lg hover:bg-white/10 transition"
+            >Impact</a
+          >
+          <a
+            href="#contact"
+            class="px-3 py-2 rounded-lg hover:bg-white/10 transition"
+            >Contact</a
+          >
+          <a
+            href="apply.html"
+            class="px-3 py-2 rounded-lg bg-primaryGreen text-darkBase font-semibold shadow-soft hover:bg-emerald-500 transition"
+          >
+            Apply for Scholarship
+          </a>
+        </div>
       </nav>
+    </header>
 
-      <!-- Mobile Nav Button -->
-      <button id="navToggle" class="md:hidden border border-white/20 px-3 py-1.5 rounded-lg text-lg hover:bg-white/10 transition" aria-label="Open Menu">
-        ☰
-      </button>
-    </div>
+    <!-- Hero -->
+    <section
+      class="relative overflow-hidden bg-gradient-to-br from-green-50 via-slate-50 to-blue-50"
+    >
+      <!-- Decorative blobs -->
+      <div
+        class="absolute -top-10 -left-10 w-64 h-64 rounded-full bg-primaryGreen blob"
+      ></div>
+      <div
+        class="absolute top-10 -right-10 w-72 h-72 rounded-full bg-primaryBlue blob"
+      ></div>
 
-    <!-- Mobile Nav Menu -->
-    <nav id="mobileNav" class="md:hidden hidden border-t border-white/10">
-      <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-1 text-sm">
-        <a href="#mission" class="px-3 py-2 rounded-lg hover:bg-white/10 transition">Mission</a>
-        <a href="#directors" class="px-3 py-2 rounded-lg hover:bg-white/10 transition">Directors</a>
-        <a href="#about" class="px-3 py-2 rounded-lg hover:bg-white/10 transition">About</a>
-        <a href="#impact" class="px-3 py-2 rounded-lg hover:bg-white/10 transition">Impact</a>
-        <a href="#contact" class="px-3 py-2 rounded-lg hover:bg-white/10 transition">Contact</a>
-        <a href="apply.html"
-           class="px-3 py-2 rounded-lg bg-primaryGreen text-darkBase font-semibold shadow-soft hover:bg-emerald-500 transition">
-          Apply for Scholarship
-        </a>
-      </div>
-    </nav>
-  </header>
-
-  <!-- Hero -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-green-50 via-slate-50 to-blue-50">
-    <!-- Decorative blobs -->
-    <div class="absolute -top-10 -left-10 w-64 h-64 rounded-full bg-primaryGreen blob"></div>
-    <div class="absolute top-10 -right-10 w-72 h-72 rounded-full bg-primaryBlue blob"></div>
-
-    <div class="relative max-w-6xl mx-auto px-4 py-12 grid gap-10 md:grid-cols-[1.6fr,1.2fr] items-center">
-      <div class="fade-up">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/70 border border-slate-200 shadow-soft text-xs text-slate-700">
-          <span class="w-2 h-2 rounded-full bg-primaryGreen"></span>
-          Applications open for the Class of 2026
-        </div>
-
-        <h1 class="text-3xl sm:text-5xl font-extrabold text-darkBase mt-4 leading-tight">
-          Empowering Students to Reach Their Next Milestone
-        </h1>
-
-        <p class="text-slate-700 mt-4 max-w-2xl leading-relaxed">
-          The Future Scholars Foundation provides scholarship awards, mentoring, and college/career guidance
-          so Class of 2026 students can pursue higher education with confidence—regardless of financial barriers.
-        </p>
-
-        <div class="mt-6 flex flex-col sm:flex-row gap-3">
-          <a href="apply.html"
-             class="inline-flex items-center justify-center gap-2 bg-primaryGreen text-darkBase font-semibold px-6 py-3 rounded-full shadow-soft hover:shadow-glowG hover:bg-emerald-500 transition">
-            Apply for Scholarship <span class="text-lg">→</span>
-          </a>
-
-          <a href="#mission"
-             class="inline-flex items-center justify-center gap-2 bg-white text-darkBase font-semibold px-6 py-3 rounded-full border border-slate-200 shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition">
-            Learn More
-          </a>
-        </div>
-
-        <!-- Quick trust row -->
-        <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div class="bg-white/80 border border-slate-200 rounded-2xl p-4 shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition">
-            <div class="text-xl font-extrabold text-darkBase">2026</div>
-            <div class="text-xs text-slate-600">Target class</div>
-          </div>
-          <div class="bg-white/80 border border-slate-200 rounded-2xl p-4 shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition">
-            <div class="text-xl font-extrabold text-darkBase">Merit</div>
-            <div class="text-xs text-slate-600">Academic focus</div>
-          </div>
-          <div class="bg-white/80 border border-slate-200 rounded-2xl p-4 shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition">
-            <div class="text-xl font-extrabold text-darkBase">Need</div>
-            <div class="text-xs text-slate-600">Financial support</div>
-          </div>
-          <div class="bg-white/80 border border-slate-200 rounded-2xl p-4 shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition">
-            <div class="text-xl font-extrabold text-darkBase">Mentor</div>
-            <div class="text-xs text-slate-600">Guidance included</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hero side card -->
-      <div class="fade-up">
-        <div class="bg-white rounded-3xl shadow-lift border border-slate-200 p-6 relative overflow-hidden">
-          <div class="absolute -top-20 -right-20 w-48 h-48 rounded-full bg-primaryBlue/10"></div>
-          <div class="absolute -bottom-20 -left-20 w-48 h-48 rounded-full bg-primaryGreen/10"></div>
-
-          <h2 class="text-lg font-bold text-darkBase mb-2">Scholarship Highlights</h2>
-          <p class="text-sm text-slate-600 mb-4">
-            A complete support package designed to help students succeed in college and beyond.
-          </p>
-
-          <ul class="space-y-3 text-sm">
-            <li class="flex gap-3">
-              <span class="mt-0.5 w-8 h-8 rounded-xl bg-green-50 border border-green-100 grid place-items-center">💵</span>
-              <div>
-                <div class="font-semibold text-darkBase">Financial Assistance</div>
-                <div class="text-slate-600">Support for tuition, books, fees, and essential supplies.</div>
-              </div>
-            </li>
-
-            <li class="flex gap-3">
-              <span class="mt-0.5 w-8 h-8 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center">🧭</span>
-              <div>
-                <div class="font-semibold text-darkBase">Mentoring & Guidance</div>
-                <div class="text-slate-600">College applications, goal setting, and accountability.</div>
-              </div>
-            </li>
-
-            <li class="flex gap-3">
-              <span class="mt-0.5 w-8 h-8 rounded-xl bg-slate-50 border border-slate-200 grid place-items-center">🏆</span>
-              <div>
-                <div class="font-semibold text-darkBase">Fair Selection</div>
-                <div class="text-slate-600">Based on merit, need, leadership, and community service.</div>
-              </div>
-            </li>
-          </ul>
-
-          <div class="mt-6 p-4 rounded-2xl bg-gradient-to-r from-green-50 to-blue-50 border border-slate-200 shadow-soft">
-            <div class="text-sm font-semibold text-darkBase">Tip for Applicants</div>
-            <div class="text-xs text-slate-600 mt-1">
-              Prepare a short personal statement describing your goals, challenges, and community impact.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Main Content -->
-  <main class="flex-1">
-
-    <!-- Mission -->
-    <section id="mission" class="py-14 bg-slate-50">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="fade-up flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-          <div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-darkBase">Mission Statement</h2>
-            <p class="text-slate-600 mt-2 max-w-2xl">
-              We remove barriers and create opportunities so motivated students can thrive.
-            </p>
-          </div>
-          <a href="apply.html"
-             class="inline-flex items-center justify-center gap-2 bg-darkBase text-white px-5 py-2.5 rounded-full shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition">
-            Start Application <span>→</span>
-          </a>
-        </div>
-
-        <div class="fade-up mt-8 grid gap-6 lg:grid-cols-3">
-          <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <div class="w-11 h-11 rounded-2xl bg-green-50 border border-green-100 grid place-items-center mb-4">📚</div>
-            <h3 class="font-bold text-darkBase">Academic Excellence</h3>
-            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-              We recognize students who stay committed to learning and demonstrate consistent effort and growth.
-            </p>
-          </div>
-
-          <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <div class="w-11 h-11 rounded-2xl bg-blue-50 border border-blue-100 grid place-items-center mb-4">🤝</div>
-            <h3 class="font-bold text-darkBase">Leadership & Service</h3>
-            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-              We value students who uplift others—through volunteering, peer leadership, school clubs, or community work.
-            </p>
-          </div>
-
-          <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <div class="w-11 h-11 rounded-2xl bg-slate-50 border border-slate-200 grid place-items-center mb-4">🌱</div>
-            <h3 class="font-bold text-darkBase">Opportunity for All</h3>
-            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-              We believe financial difficulty should never block a student from pursuing college, training, or career goals.
-            </p>
-          </div>
-        </div>
-
-        <div class="fade-up mt-8 bg-white border border-slate-200 rounded-3xl p-6 shadow-soft">
-          <h3 class="font-bold text-darkBase">How We Deliver Our Mission</h3>
-          <div class="mt-4 grid gap-4 md:grid-cols-3 text-sm">
-            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-soft transition">
-              <div class="font-semibold text-darkBase">1) Identify</div>
-              <div class="text-slate-600 mt-1">Partner with schools and community leaders to reach eligible students.</div>
-            </div>
-            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-soft transition">
-              <div class="font-semibold text-darkBase">2) Support</div>
-              <div class="text-slate-600 mt-1">Provide scholarship funding and practical resources for college readiness.</div>
-            </div>
-            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-soft transition">
-              <div class="font-semibold text-darkBase">3) Guide</div>
-              <div class="text-slate-600 mt-1">Offer mentoring, workshops, and ongoing check-ins for student success.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Directors -->
-    <section id="directors" class="py-14 bg-white">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="fade-up flex items-end justify-between gap-4">
-          <div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-darkBase">Board of Directors</h2>
-            <p class="text-slate-600 mt-2 max-w-2xl">
-              Our leadership team ensures transparency, fairness, and long-term impact.
-            </p>
-          </div>
-        </div>
-
-        <div class="fade-up mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 text-sm">
-          <!-- Card -->
-          <div class="group bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-2xl bg-primaryBlue/10 border border-primaryBlue/20 grid place-items-center font-bold text-primaryBlue">
-                AR
-              </div>
-              <div class="flex-1">
-                <h3 class="font-extrabold text-darkBase">Dr. Ayesha Rahman</h3>
-                <p class="text-primaryBlue text-xs font-semibold">Executive Director</p>
-              </div>
-            </div>
-            <p class="text-slate-600 mt-3 leading-relaxed">
-              Leads strategy and outreach, building partnerships with schools and donors to expand scholarship access.
-            </p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="text-xs px-2.5 py-1 rounded-full bg-green-50 border border-green-100 text-slate-700">Nonprofit Leadership</span>
-              <span class="text-xs px-2.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-slate-700">Education Strategy</span>
-            </div>
-          </div>
-
-          <div class="group bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-2xl bg-primaryGreen/10 border border-primaryGreen/20 grid place-items-center font-bold text-emerald-600">
-                MT
-              </div>
-              <div class="flex-1">
-                <h3 class="font-extrabold text-darkBase">Michael Thompson</h3>
-                <p class="text-primaryBlue text-xs font-semibold">Finance Director</p>
-              </div>
-            </div>
-            <p class="text-slate-600 mt-3 leading-relaxed">
-              Oversees budgeting, funding strategy, and donor stewardship to protect scholarship continuity year after year.
-            </p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="text-xs px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-700">Financial Oversight</span>
-              <span class="text-xs px-2.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-slate-700">Sustainability</span>
-            </div>
-          </div>
-
-          <div class="group bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-2xl bg-slate-900/10 border border-slate-900/15 grid place-items-center font-bold text-slate-800">
-                SL
-              </div>
-              <div class="flex-1">
-                <h3 class="font-extrabold text-darkBase">Sarah Lee</h3>
-                <p class="text-primaryBlue text-xs font-semibold">Program Director</p>
-              </div>
-            </div>
-            <p class="text-slate-600 mt-3 leading-relaxed">
-              Manages application review, schedules interviews, and coordinates mentoring and student success programming.
-            </p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="text-xs px-2.5 py-1 rounded-full bg-green-50 border border-green-100 text-slate-700">Mentoring</span>
-              <span class="text-xs px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-700">Student Support</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Advisors/Review panel -->
-        <div class="fade-up mt-8 grid gap-6 lg:grid-cols-2">
-          <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift transition">
-            <h3 class="font-extrabold text-darkBase">Application Review Panel</h3>
-            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-              Our panel includes educators, community leaders, and program alumni. Each application is scored using a
-              consistent rubric to ensure fairness and transparency.
-            </p>
-            <ul class="mt-4 text-sm text-slate-700 space-y-2">
-              <li class="flex gap-2"><span class="text-primaryGreen">✓</span> Academic performance and progress</li>
-              <li class="flex gap-2"><span class="text-primaryGreen">✓</span> Financial need and circumstances</li>
-              <li class="flex gap-2"><span class="text-primaryGreen">✓</span> Leadership and community impact</li>
-              <li class="flex gap-2"><span class="text-primaryGreen">✓</span> Personal statement and goals</li>
-            </ul>
-          </div>
-
-          <div class="bg-gradient-to-br from-green-50 to-blue-50 border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift transition">
-            <h3 class="font-extrabold text-darkBase">Transparency Promise</h3>
-            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-              We communicate timelines clearly and protect applicant privacy. Students receive updates at each major step.
-            </p>
-            <div class="mt-4 grid gap-3 sm:grid-cols-2 text-sm">
-              <div class="bg-white/70 border border-slate-200 rounded-2xl p-4 shadow-soft">
-                <div class="font-semibold text-darkBase">Clear Timelines</div>
-                <div class="text-slate-600 mt-1">Deadlines and results are shared in advance.</div>
-              </div>
-              <div class="bg-white/70 border border-slate-200 rounded-2xl p-4 shadow-soft">
-                <div class="font-semibold text-darkBase">Privacy First</div>
-                <div class="text-slate-600 mt-1">Your information is handled securely.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="py-14 bg-sky-50">
-      <div class="max-w-6xl mx-auto px-4">
+      <div
+        class="relative max-w-6xl mx-auto px-4 py-12 grid gap-10 md:grid-cols-[1.6fr,1.2fr] items-center"
+      >
         <div class="fade-up">
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-darkBase">About Us</h2>
-          <p class="text-slate-600 mt-2 max-w-3xl leading-relaxed">
-            Future Scholars Foundation is a community-based nonprofit built by educators, alumni, and local leaders.
-            We support students with scholarship funding and real-world preparation for college, training programs, and careers.
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/70 border border-slate-200 shadow-soft text-xs text-slate-700"
+          >
+            <span class="w-2 h-2 rounded-full bg-primaryGreen"></span>
+            Applications open for the Class of 2026
+          </div>
+
+          <h1
+            class="text-3xl sm:text-5xl font-extrabold text-darkBase mt-4 leading-tight"
+          >
+            Empowering Students to Reach Their Next Milestone
+          </h1>
+
+          <p class="text-slate-700 mt-4 max-w-2xl leading-relaxed">
+            The American Muslim Alliance of Florida provides scholarship awards,
+            mentoring, and college/career guidance so Class of 2026 students can
+            pursue higher education with confidence—regardless of financial
+            barriers.
           </p>
-        </div>
 
-        <div class="fade-up mt-8 grid gap-6 lg:grid-cols-3">
-          <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <h3 class="font-extrabold text-darkBase">What We Believe</h3>
-            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-              Talent is everywhere, but opportunity is not. We help close the gap with support, structure, and mentorship.
-            </p>
-            <div class="mt-4 space-y-2 text-sm text-slate-700">
-              <div class="flex gap-2"><span class="text-primaryBlue">●</span> Education transforms families and communities</div>
-              <div class="flex gap-2"><span class="text-primaryBlue">●</span> Mentorship increases long-term success</div>
-              <div class="flex gap-2"><span class="text-primaryBlue">●</span> Transparency builds trust</div>
-            </div>
-          </div>
+          <div class="mt-6 flex flex-col sm:flex-row gap-3">
+            <a
+              href="apply.html"
+              class="inline-flex items-center justify-center gap-2 bg-primaryGreen text-darkBase font-semibold px-6 py-3 rounded-full shadow-soft hover:shadow-glowG hover:bg-emerald-500 transition"
+            >
+              Apply for Scholarship <span class="text-lg">→</span>
+            </a>
 
-          <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <h3 class="font-extrabold text-darkBase">What We Provide</h3>
-            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-              Our program goes beyond money—students receive guidance and tools that help them move forward confidently.
-            </p>
-            <div class="mt-4 grid gap-3 text-sm">
-              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-soft transition">
-                <div class="font-semibold text-darkBase">Scholarship Award</div>
-                <div class="text-slate-600 mt-1">Help with tuition, books, and fees.</div>
-              </div>
-              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-soft transition">
-                <div class="font-semibold text-darkBase">Workshops</div>
-                <div class="text-slate-600 mt-1">Essays, FAFSA basics, resumes, and interviews.</div>
-              </div>
-              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-soft transition">
-                <div class="font-semibold text-darkBase">Mentor Matching</div>
-                <div class="text-slate-600 mt-1">Students get support from trusted adults.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <h3 class="font-extrabold text-darkBase">Program Timeline</h3>
-            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-              Typical steps for applicants and recipients.
-            </p>
-            <ol class="mt-4 space-y-3 text-sm">
-              <li class="flex gap-3">
-                <span class="w-7 h-7 rounded-xl bg-primaryGreen/15 border border-primaryGreen/25 grid place-items-center font-bold text-emerald-700">1</span>
-                <div>
-                  <div class="font-semibold text-darkBase">Apply</div>
-                  <div class="text-slate-600">Complete the form and upload required documents.</div>
-                </div>
-              </li>
-              <li class="flex gap-3">
-                <span class="w-7 h-7 rounded-xl bg-primaryBlue/15 border border-primaryBlue/25 grid place-items-center font-bold text-blue-700">2</span>
-                <div>
-                  <div class="font-semibold text-darkBase">Review</div>
-                  <div class="text-slate-600">Panel evaluates with a consistent scoring rubric.</div>
-                </div>
-              </li>
-              <li class="flex gap-3">
-                <span class="w-7 h-7 rounded-xl bg-slate-900/10 border border-slate-900/15 grid place-items-center font-bold text-slate-800">3</span>
-                <div>
-                  <div class="font-semibold text-darkBase">Award & Mentor</div>
-                  <div class="text-slate-600">Recipients receive funding and ongoing support.</div>
-                </div>
-              </li>
-            </ol>
-          </div>
-        </div>
-
-        <!-- Testimonials -->
-        <div class="fade-up mt-8 bg-white border border-slate-200 rounded-3xl p-6 shadow-soft">
-          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-            <div>
-              <h3 class="text-xl font-extrabold text-darkBase">Student Stories</h3>
-              <p class="text-sm text-slate-600 mt-1">Short quotes to build trust and credibility.</p>
-            </div>
-            <a href="apply.html" class="text-sm font-semibold text-primaryBlue hover:underline">
-              Become a Scholar →
+            <a
+              href="#mission"
+              class="inline-flex items-center justify-center gap-2 bg-white text-darkBase font-semibold px-6 py-3 rounded-full border border-slate-200 shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition"
+            >
+              Learn More
             </a>
           </div>
 
-          <div class="mt-6 grid gap-4 md:grid-cols-3 text-sm">
-            <div class="p-5 rounded-3xl bg-slate-50 border border-slate-200 hover:shadow-lift hover:-translate-y-1 transition">
-              <div class="text-slate-600 leading-relaxed">
-                “The mentoring helped me organize my applications and write a stronger essay. I felt supported.”
-              </div>
-              <div class="mt-4 font-semibold text-darkBase">— Scholarship Recipient</div>
+          <!-- Quick trust row -->
+          <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div
+              class="bg-white/80 border border-slate-200 rounded-2xl p-4 shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition"
+            >
+              <div class="text-xl font-extrabold text-darkBase">2026</div>
+              <div class="text-xs text-slate-600">Target class</div>
             </div>
-
-            <div class="p-5 rounded-3xl bg-slate-50 border border-slate-200 hover:shadow-lift hover:-translate-y-1 transition">
-              <div class="text-slate-600 leading-relaxed">
-                “The scholarship reduced stress at home. I could focus on school and plan my future.”
-              </div>
-              <div class="mt-4 font-semibold text-darkBase">— Class of 2026 Student</div>
+            <div
+              class="bg-white/80 border border-slate-200 rounded-2xl p-4 shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition"
+            >
+              <div class="text-xl font-extrabold text-darkBase">Merit</div>
+              <div class="text-xs text-slate-600">Academic focus</div>
             </div>
-
-            <div class="p-5 rounded-3xl bg-slate-50 border border-slate-200 hover:shadow-lift hover:-translate-y-1 transition">
-              <div class="text-slate-600 leading-relaxed">
-                “The workshops taught me interview skills and how to communicate my goals clearly.”
-              </div>
-              <div class="mt-4 font-semibold text-darkBase">— Program Participant</div>
+            <div
+              class="bg-white/80 border border-slate-200 rounded-2xl p-4 shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition"
+            >
+              <div class="text-xl font-extrabold text-darkBase">Need</div>
+              <div class="text-xs text-slate-600">Financial support</div>
+            </div>
+            <div
+              class="bg-white/80 border border-slate-200 rounded-2xl p-4 shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition"
+            >
+              <div class="text-xl font-extrabold text-darkBase">Mentor</div>
+              <div class="text-xs text-slate-600">Guidance included</div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Impact / Stats + FAQ -->
-    <section id="impact" class="py-14 bg-white">
-      <div class="max-w-6xl mx-auto px-4">
+        <!-- Hero side card -->
         <div class="fade-up">
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-darkBase">Our Impact Focus</h2>
-          <p class="text-slate-600 mt-2 max-w-3xl leading-relaxed">
-            We measure success through student progress, confidence, and long-term outcomes—not only awards.
-          </p>
-        </div>
+          <div
+            class="bg-white rounded-3xl shadow-lift border border-slate-200 p-6 relative overflow-hidden"
+          >
+            <div
+              class="absolute -top-20 -right-20 w-48 h-48 rounded-full bg-primaryBlue/10"
+            ></div>
+            <div
+              class="absolute -bottom-20 -left-20 w-48 h-48 rounded-full bg-primaryGreen/10"
+            ></div>
 
-        <div class="fade-up mt-8 grid gap-6 lg:grid-cols-3">
-          <div class="bg-gradient-to-br from-green-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <div class="text-3xl font-extrabold text-darkBase">Support</div>
-            <div class="text-sm text-slate-600 mt-1">Funding + mentoring + workshops.</div>
-          </div>
-
-          <div class="bg-gradient-to-br from-blue-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <div class="text-3xl font-extrabold text-darkBase">Guidance</div>
-            <div class="text-sm text-slate-600 mt-1">Clear steps and strong accountability.</div>
-          </div>
-
-          <div class="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <div class="text-3xl font-extrabold text-darkBase">Community</div>
-            <div class="text-sm text-slate-600 mt-1">A network that keeps students moving forward.</div>
-          </div>
-        </div>
-
-        <div class="fade-up mt-8 grid gap-6 lg:grid-cols-2">
-          <!-- FAQ -->
-          <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift transition">
-            <h3 class="text-xl font-extrabold text-darkBase">Quick FAQ</h3>
-            <div class="mt-4 space-y-3 text-sm">
-              <details class="group bg-white border border-slate-200 rounded-2xl p-4 shadow-soft">
-                <summary class="cursor-pointer font-semibold text-darkBase flex items-center justify-between">
-                  Who can apply?
-                  <span class="text-slate-400 group-open:rotate-180 transition">⌄</span>
-                </summary>
-                <p class="text-slate-600 mt-2 leading-relaxed">
-                  Students in the Class of 2026 who meet eligibility requirements listed on the application page.
-                </p>
-              </details>
-
-              <details class="group bg-white border border-slate-200 rounded-2xl p-4 shadow-soft">
-                <summary class="cursor-pointer font-semibold text-darkBase flex items-center justify-between">
-                  What documents are needed?
-                  <span class="text-slate-400 group-open:rotate-180 transition">⌄</span>
-                </summary>
-                <p class="text-slate-600 mt-2 leading-relaxed">
-                  Typically: application form, personal statement, transcript (or grades), and one recommendation.
-                </p>
-              </details>
-
-              <details class="group bg-white border border-slate-200 rounded-2xl p-4 shadow-soft">
-                <summary class="cursor-pointer font-semibold text-darkBase flex items-center justify-between">
-                  How are recipients selected?
-                  <span class="text-slate-400 group-open:rotate-180 transition">⌄</span>
-                </summary>
-                <p class="text-slate-600 mt-2 leading-relaxed">
-                  A review panel uses a rubric scoring academics, need, leadership, service, and goals.
-                </p>
-              </details>
-            </div>
-          </div>
-
-          <!-- CTA -->
-          <div class="bg-gradient-to-br from-darkBase to-slate-900 border border-white/10 rounded-3xl p-6 shadow-lift text-white relative overflow-hidden">
-            <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-primaryBlue/20 blur-3xl"></div>
-            <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-primaryGreen/20 blur-3xl"></div>
-
-            <h3 class="text-xl font-extrabold">Ready to Apply?</h3>
-            <p class="text-white/75 mt-2 leading-relaxed">
-              Start your scholarship application and upload the required form. If you need help, contact us—we respond quickly.
+            <h2 class="text-lg font-bold text-darkBase mb-2">
+              Scholarship Highlights
+            </h2>
+            <p class="text-sm text-slate-600 mb-4">
+              A complete support package designed to help students succeed in
+              college and beyond.
             </p>
 
-            <div class="mt-5 flex flex-col sm:flex-row gap-3">
-              <a href="apply.html"
-                 class="inline-flex items-center justify-center gap-2 bg-primaryGreen text-darkBase font-semibold px-6 py-3 rounded-full shadow-soft hover:shadow-glowG hover:bg-emerald-500 transition">
-                Apply Now <span>→</span>
-              </a>
-              <a href="#contact"
-                 class="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/15 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/15 transition">
-                Contact Us
-              </a>
-            </div>
+            <ul class="space-y-3 text-sm">
+              <li class="flex gap-3">
+                <span
+                  class="mt-0.5 w-8 h-8 rounded-xl bg-green-50 border border-green-100 grid place-items-center"
+                  >💵</span
+                >
+                <div>
+                  <div class="font-semibold text-darkBase">
+                    Financial Assistance
+                  </div>
+                  <div class="text-slate-600">
+                    Support for tuition, books, fees, and essential supplies.
+                  </div>
+                </div>
+              </li>
 
-            <div class="mt-5 text-xs text-white/60">
-              Tip: Use a strong personal statement—your goals, challenges, and impact matter.
+              <li class="flex gap-3">
+                <span
+                  class="mt-0.5 w-8 h-8 rounded-xl bg-blue-50 border border-blue-100 grid place-items-center"
+                  >🧭</span
+                >
+                <div>
+                  <div class="font-semibold text-darkBase">
+                    Mentoring & Guidance
+                  </div>
+                  <div class="text-slate-600">
+                    College applications, goal setting, and accountability.
+                  </div>
+                </div>
+              </li>
+
+              <li class="flex gap-3">
+                <span
+                  class="mt-0.5 w-8 h-8 rounded-xl bg-slate-50 border border-slate-200 grid place-items-center"
+                  >🏆</span
+                >
+                <div>
+                  <div class="font-semibold text-darkBase">Fair Selection</div>
+                  <div class="text-slate-600">
+                    Based on merit, need, leadership, and community service.
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <div
+              class="mt-6 p-4 rounded-2xl bg-gradient-to-r from-green-50 to-blue-50 border border-slate-200 shadow-soft"
+            >
+              <div class="text-sm font-semibold text-darkBase">
+                Tip for Applicants
+              </div>
+              <div class="text-xs text-slate-600 mt-1">
+                Prepare a short personal statement describing your goals,
+                challenges, and community impact.
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" class="py-14 bg-slate-50">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="fade-up">
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-darkBase">Contact Information</h2>
-          <p class="text-slate-600 mt-2 max-w-2xl">
-            Reach out for application help, eligibility questions, or partnership opportunities.
-          </p>
-        </div>
+    <!-- Main Content -->
+    <main class="flex-1">
+      <!-- Mission -->
+      <section id="mission" class="py-14 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4">
+          <div
+            class="fade-up flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+          >
+            <div>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-darkBase">
+                Mission Statement
+              </h2>
+              <p class="text-slate-600 mt-2 max-w-2xl">
+                We remove barriers and create opportunities so motivated
+                students can thrive.
+              </p>
+            </div>
+            <a
+              href="apply.html"
+              class="inline-flex items-center justify-center gap-2 bg-darkBase text-white px-5 py-2.5 rounded-full shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition"
+            >
+              Start Application <span>→</span>
+            </a>
+          </div>
 
-        <div class="fade-up mt-8 grid gap-6 md:grid-cols-3 text-sm">
-          <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <h3 class="font-extrabold text-darkBase mb-2">Mailing Address</h3>
-            <p class="text-slate-700 leading-relaxed">
-              Future Scholars Foundation<br />
-              123 Greenway Avenue<br />
-              Springfield, USA
+          <div class="mt-10">
+            <p>
+              The AMAF scholarship program aims to assist students across the
+              state of Florida who seek higher college education. We have
+              received a plethora of applications from many high schools and are
+              excited to see so many promising students seeking a bright future.
+              We wish to award every applicant with a scholarship, but
+              unfortunately we have limited funds and resources available for
+              the scholarship program. For this program, we will be awarding
+              more than $20,000 in scholarships to the most well-rounded
+              students and we awarded also last year $24,400 to 42 Students.
+            </p>
+            <br />
+
+            <p>
+              AMAF’s overall mission is to unite and collaborate with all
+              members of the community and provide the youth with the
+              opportunities to pursue their careers through higher level
+              education. The contributions of AMAF have opened up new paths to
+              great positive change. We have devoted our resources to strengthen
+              and support interfaith understanding through formal community
+              dialogues, free medical clinics, and our annual interfaith picnic.
             </p>
           </div>
 
-          <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <h3 class="font-extrabold text-darkBase mb-2">Email & Phone</h3>
-            <p class="text-slate-700">
-              Email:
-              <a href="mailto:info@futurescholars2026.org" class="text-primaryBlue font-semibold hover:underline">
-                info@futurescholars2026.org
-              </a>
-            </p>
-            <p class="text-slate-700 mt-2">
-              Phone:
-              <a href="tel:+11234567890" class="text-primaryBlue font-semibold hover:underline">
-                +1 (123) 456-7890
-              </a>
-            </p>
+          <div class="fade-up mt-8 grid gap-6 lg:grid-cols-3">
+            <div
+              class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div
+                class="w-11 h-11 rounded-2xl bg-green-50 border border-green-100 grid place-items-center mb-4"
+              >
+                📚
+              </div>
+              <h3 class="font-bold text-darkBase">Academic Excellence</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                We recognize students who stay committed to learning and
+                demonstrate consistent effort and growth.
+              </p>
+            </div>
 
-            <div class="mt-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
-              <div class="font-semibold text-darkBase">Response Time</div>
-              <div class="text-slate-600 text-xs mt-1">Usually within 24–48 hours (business days).</div>
+            <div
+              class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div
+                class="w-11 h-11 rounded-2xl bg-blue-50 border border-blue-100 grid place-items-center mb-4"
+              >
+                🤝
+              </div>
+              <h3 class="font-bold text-darkBase">Leadership & Service</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                We value students who uplift others—through volunteering, peer
+                leadership, school clubs, or community work.
+              </p>
+            </div>
+
+            <div
+              class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div
+                class="w-11 h-11 rounded-2xl bg-slate-50 border border-slate-200 grid place-items-center mb-4"
+              >
+                🌱
+              </div>
+              <h3 class="font-bold text-darkBase">Opportunity for All</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                We believe financial difficulty should never block a student
+                from pursuing college, training, or career goals.
+              </p>
             </div>
           </div>
 
-          <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition">
-            <h3 class="font-extrabold text-darkBase mb-2">Office Hours</h3>
-            <p class="text-slate-700 leading-relaxed">
-              Monday – Friday: 9:00 AM – 5:00 PM<br />
-              Closed on weekends and holidays
-            </p>
-            <div class="mt-4 flex gap-2">
-              <a href="#"
-                 class="flex-1 text-center px-4 py-2 rounded-full bg-primaryBlue text-white font-semibold shadow-soft hover:bg-blue-700 hover:shadow-glowB transition">
-                Directions
-              </a>
-              <a href="apply.html"
-                 class="flex-1 text-center px-4 py-2 rounded-full bg-primaryGreen text-darkBase font-semibold shadow-soft hover:bg-emerald-500 hover:shadow-glowG transition">
-                Apply
-              </a>
+          <div
+            class="fade-up mt-8 bg-white border border-slate-200 rounded-3xl p-6 shadow-soft"
+          >
+            <h3 class="font-bold text-darkBase">How We Deliver Our Mission</h3>
+            <div class="mt-4 grid gap-4 md:grid-cols-3 text-sm">
+              <div
+                class="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-soft transition"
+              >
+                <div class="font-bold text-darkBase">1. Identify</div>
+                <div class="text-slate-600 mt-1">
+                  Partner with schools and community leaders to reach eligible
+                  students.
+                </div>
+              </div>
+              <div
+                class="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-soft transition"
+              >
+                <div class="font-bold text-darkBase">2. Support</div>
+                <div class="text-slate-600 mt-1">
+                  Provide scholarship funding and practical resources for
+                  college readiness.
+                </div>
+              </div>
+              <div
+                class="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-soft transition"
+              >
+                <div class="font-bold text-darkBase">3. Guide</div>
+                <div class="text-slate-600 mt-1">
+                  Offer mentoring, workshops, and ongoing check-ins for student
+                  success.
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </section>
+
+      <!-- Directors -->
+      <section id="directors" class="py-14 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+          <div class="fade-up flex items-end justify-between gap-4">
+            <div>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-darkBase">
+                AMAF Board of Directors & Officers
+              </h2>
+              <p class="text-slate-600 mt-2 max-w-2xl">
+                Our leadership team ensures transparency, fairness, and
+                long-term impact.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="fade-up mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 text-sm"
+          >
+            <!-- Card 1 -->
+            <div
+              class="group bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-12 h-12 rounded-2xl bg-primaryBlue/10 border border-primaryBlue/20 grid place-items-center font-bold text-primaryBlue"
+                >
+                  MO
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-extrabold text-darkBase">
+                    Mohammad Osman Chowdhury
+                  </h3>
+                  <p class="text-primaryBlue text-xs font-semibold">
+                    President
+                  </p>
+                </div>
+              </div>
+              <p class="text-slate-600 mt-3 leading-relaxed">
+                Provides overall leadership, governance direction, and strategic
+                oversight for AMAF.
+              </p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span
+                  class="text-xs px-2.5 py-1 rounded-full bg-green-50 border border-green-100 text-slate-700"
+                  >Governance</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-slate-700"
+                  >Strategy</span
+                >
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div
+              class="group bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-12 h-12 rounded-2xl bg-primaryGreen/10 border border-primaryGreen/20 grid place-items-center font-bold text-emerald-600"
+                >
+                  SA
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-extrabold text-darkBase">Shakir Ahmed</h3>
+                  <p class="text-primaryBlue text-xs font-semibold">
+                    Vice President
+                  </p>
+                </div>
+              </div>
+              <p class="text-slate-600 mt-3 leading-relaxed">
+                Supports organizational leadership and helps coordinate board
+                priorities and initiatives.
+              </p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span
+                  class="text-xs px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-700"
+                  >Operations</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-slate-700"
+                  >Board Support</span
+                >
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div
+              class="group bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-12 h-12 rounded-2xl bg-slate-900/10 border border-slate-900/15 grid place-items-center font-bold text-slate-800"
+                >
+                  MS
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-extrabold text-darkBase">
+                    Mohammad Shamim Al Razin
+                  </h3>
+                  <p class="text-primaryBlue text-xs font-semibold">
+                    Vice President
+                  </p>
+                </div>
+              </div>
+              <p class="text-slate-600 mt-3 leading-relaxed">
+                Strengthens governance, community engagement, and supports
+                program execution with the team.
+              </p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span
+                  class="text-xs px-2.5 py-1 rounded-full bg-green-50 border border-green-100 text-slate-700"
+                  >Community</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-700"
+                  >Leadership</span
+                >
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div
+              class="group bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-12 h-12 rounded-2xl bg-primaryBlue/10 border border-primaryBlue/20 grid place-items-center font-bold text-primaryBlue"
+                >
+                  IA
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-extrabold text-darkBase">Imran Aziz</h3>
+                  <p class="text-primaryBlue text-xs font-semibold">
+                    Gen. Secretary
+                  </p>
+                </div>
+              </div>
+              <p class="text-slate-600 mt-3 leading-relaxed">
+                Maintains records, meeting minutes, and coordination across
+                board communications.
+              </p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span
+                  class="text-xs px-2.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-slate-700"
+                  >Documentation</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-700"
+                  >Coordination</span
+                >
+              </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div
+              class="group bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-12 h-12 rounded-2xl bg-primaryGreen/10 border border-primaryGreen/20 grid place-items-center font-bold text-emerald-600"
+                >
+                  MJ
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-extrabold text-darkBase">
+                    Mohammad Jamaluddin
+                  </h3>
+                  <p class="text-primaryBlue text-xs font-semibold">
+                    Treasurer
+                  </p>
+                </div>
+              </div>
+              <p class="text-slate-600 mt-3 leading-relaxed">
+                Oversees financial stewardship, reporting, and responsible
+                budgeting for scholarship impact.
+              </p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span
+                  class="text-xs px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-700"
+                  >Finance</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded-full bg-green-50 border border-green-100 text-slate-700"
+                  >Accountability</span
+                >
+              </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div
+              class="group bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div class="flex items-start gap-4">
+                <div
+                  class="w-12 h-12 rounded-2xl bg-slate-900/10 border border-slate-900/15 grid place-items-center font-bold text-slate-800"
+                >
+                  NA
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-extrabold text-darkBase">Nazma Akhter</h3>
+                  <p class="text-primaryBlue text-xs font-semibold">
+                    Women Affairs Secretary
+                  </p>
+                </div>
+              </div>
+              <p class="text-slate-600 mt-3 leading-relaxed">
+                Leads women-focused initiatives, inclusion, and outreach to
+                broaden community participation.
+              </p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span
+                  class="text-xs px-2.5 py-1 rounded-full bg-green-50 border border-green-100 text-slate-700"
+                  >Inclusion</span
+                >
+                <span
+                  class="text-xs px-2.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-slate-700"
+                  >Outreach</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- View More -->
+          <div class="fade-up mt-8 flex justify-center">
+            <a
+              href="directors.html"
+              class="inline-flex items-center gap-2 rounded-full bg-darkBase text-white px-6 py-3 font-semibold shadow-soft hover:shadow-lift transition"
+            >
+              All Directors
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <!-- Advisors/Review panel -->
+          <div class="fade-up mt-8 grid gap-6 lg:grid-cols-2">
+            <div
+              class="bg-slate-50 border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift transition"
+            >
+              <h3 class="font-extrabold text-darkBase">
+                Application Review Panel
+              </h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                Our panel includes educators, community leaders, and program
+                alumni. Each application is scored using a consistent rubric to
+                ensure fairness and transparency.
+              </p>
+              <ul class="mt-4 text-sm text-slate-700 space-y-2">
+                <li class="flex gap-2">
+                  <span class="text-primaryGreen">✓</span> Academic performance
+                  and progress
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-primaryGreen">✓</span> Financial need and
+                  circumstances
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-primaryGreen">✓</span> Leadership and
+                  community impact
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-primaryGreen">✓</span> Personal statement
+                  and goals
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-green-50 to-blue-50 border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift transition"
+            >
+              <h3 class="font-extrabold text-darkBase">Transparency Promise</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                We communicate timelines clearly and protect applicant privacy.
+                Students receive updates at each major step.
+              </p>
+              <div class="mt-4 grid gap-3 sm:grid-cols-2 text-sm">
+                <div
+                  class="bg-white/70 border border-slate-200 rounded-2xl p-4 shadow-soft"
+                >
+                  <div class="font-semibold text-darkBase">Clear Timelines</div>
+                  <div class="text-slate-600 mt-1">
+                    Deadlines and results are shared in advance.
+                  </div>
+                </div>
+                <div
+                  class="bg-white/70 border border-slate-200 rounded-2xl p-4 shadow-soft"
+                >
+                  <div class="font-semibold text-darkBase">Privacy First</div>
+                  <div class="text-slate-600 mt-1">
+                    Your information is handled securely.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="py-14 bg-sky-50">
+        <div class="max-w-6xl mx-auto px-4">
+          <div class="fade-up">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-darkBase">
+              About Us
+            </h2>
+            <p class="text-slate-600 mt-2 max-w-3xl leading-relaxed">
+              Future Scholars Foundation is a community-based nonprofit built by
+              educators, alumni, and local leaders. We support students with
+              scholarship funding and real-world preparation for college,
+              training programs, and careers.
+            </p>
+          </div>
+
+          <div class="fade-up mt-8 grid gap-6 lg:grid-cols-3">
+            <div
+              class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <h3 class="font-extrabold text-darkBase">What We Believe</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                Talent is everywhere, but opportunity is not. We help close the
+                gap with support, structure, and mentorship.
+              </p>
+              <div class="mt-4 space-y-2 text-sm text-slate-700">
+                <div class="flex gap-2">
+                  <span class="text-primaryBlue">●</span> Education transforms
+                  families and communities
+                </div>
+                <div class="flex gap-2">
+                  <span class="text-primaryBlue">●</span> Mentorship increases
+                  long-term success
+                </div>
+                <div class="flex gap-2">
+                  <span class="text-primaryBlue">●</span> Transparency builds
+                  trust
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <h3 class="font-extrabold text-darkBase">What We Provide</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                Our program goes beyond money—students receive guidance and
+                tools that help them move forward confidently.
+              </p>
+              <div class="mt-4 grid gap-3 text-sm">
+                <div
+                  class="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-soft transition"
+                >
+                  <div class="font-semibold text-darkBase">
+                    Scholarship Award
+                  </div>
+                  <div class="text-slate-600 mt-1">
+                    Help with tuition, books, and fees.
+                  </div>
+                </div>
+                <div
+                  class="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-soft transition"
+                >
+                  <div class="font-semibold text-darkBase">Workshops</div>
+                  <div class="text-slate-600 mt-1">
+                    Essays, FAFSA basics, resumes, and interviews.
+                  </div>
+                </div>
+                <div
+                  class="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:shadow-soft transition"
+                >
+                  <div class="font-semibold text-darkBase">Mentor Matching</div>
+                  <div class="text-slate-600 mt-1">
+                    Students get support from trusted adults.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <h3 class="font-extrabold text-darkBase">Program Timeline</h3>
+              <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                Typical steps for applicants and recipients.
+              </p>
+              <ol class="mt-4 space-y-3 text-sm">
+                <li class="flex gap-3">
+                  <span
+                    class="w-7 h-7 rounded-xl bg-primaryGreen/15 border border-primaryGreen/25 grid place-items-center font-bold text-emerald-700"
+                    >1</span
+                  >
+                  <div>
+                    <div class="font-semibold text-darkBase">Apply</div>
+                    <div class="text-slate-600">
+                      Complete the form and upload required documents.
+                    </div>
+                  </div>
+                </li>
+                <li class="flex gap-3">
+                  <span
+                    class="w-7 h-7 rounded-xl bg-primaryBlue/15 border border-primaryBlue/25 grid place-items-center font-bold text-blue-700"
+                    >2</span
+                  >
+                  <div>
+                    <div class="font-semibold text-darkBase">Review</div>
+                    <div class="text-slate-600">
+                      Panel evaluates with a consistent scoring rubric.
+                    </div>
+                  </div>
+                </li>
+                <li class="flex gap-3">
+                  <span
+                    class="w-7 h-7 rounded-xl bg-slate-900/10 border border-slate-900/15 grid place-items-center font-bold text-slate-800"
+                    >3</span
+                  >
+                  <div>
+                    <div class="font-semibold text-darkBase">
+                      Award & Mentor
+                    </div>
+                    <div class="text-slate-600">
+                      Recipients receive funding and ongoing support.
+                    </div>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Testimonials -->
+          <div
+            class="fade-up mt-8 bg-white border border-slate-200 rounded-3xl p-6 shadow-soft"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+            >
+              <div>
+                <h3 class="text-xl font-extrabold text-darkBase">
+                  Student Stories
+                </h3>
+                <p class="text-sm text-slate-600 mt-1">
+                  Short quotes to build trust and credibility.
+                </p>
+              </div>
+              <a
+                href="apply.html"
+                class="text-sm font-semibold text-primaryBlue hover:underline"
+              >
+                Become a Scholar →
+              </a>
+            </div>
+
+            <div class="mt-6 grid gap-4 md:grid-cols-3 text-sm">
+              <div
+                class="p-5 rounded-3xl bg-slate-50 border border-slate-200 hover:shadow-lift hover:-translate-y-1 transition"
+              >
+                <div class="text-slate-600 leading-relaxed">
+                  “The mentoring helped me organize my applications and write a
+                  stronger essay. I felt supported.”
+                </div>
+                <div class="mt-4 font-semibold text-darkBase">
+                  — Scholarship Recipient
+                </div>
+              </div>
+
+              <div
+                class="p-5 rounded-3xl bg-slate-50 border border-slate-200 hover:shadow-lift hover:-translate-y-1 transition"
+              >
+                <div class="text-slate-600 leading-relaxed">
+                  “The scholarship reduced stress at home. I could focus on
+                  school and plan my future.”
+                </div>
+                <div class="mt-4 font-semibold text-darkBase">
+                  — Class of 2026 Student
+                </div>
+              </div>
+
+              <div
+                class="p-5 rounded-3xl bg-slate-50 border border-slate-200 hover:shadow-lift hover:-translate-y-1 transition"
+              >
+                <div class="text-slate-600 leading-relaxed">
+                  “The workshops taught me interview skills and how to
+                  communicate my goals clearly.”
+                </div>
+                <div class="mt-4 font-semibold text-darkBase">
+                  — Program Participant
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Impact / Stats + FAQ -->
+      <section id="impact" class="py-14 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+          <div class="fade-up">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-darkBase">
+              Our Impact Focus
+            </h2>
+            <p class="text-slate-600 mt-2 max-w-3xl leading-relaxed">
+              We measure success through student progress, confidence, and
+              long-term outcomes—not only awards.
+            </p>
+          </div>
+
+          <div class="fade-up mt-8 grid gap-6 lg:grid-cols-3">
+            <div
+              class="bg-gradient-to-br from-green-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div class="text-3xl font-extrabold text-darkBase">Support</div>
+              <div class="text-sm text-slate-600 mt-1">
+                Funding + mentoring + workshops.
+              </div>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-blue-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div class="text-3xl font-extrabold text-darkBase">Guidance</div>
+              <div class="text-sm text-slate-600 mt-1">
+                Clear steps and strong accountability.
+              </div>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <div class="text-3xl font-extrabold text-darkBase">Community</div>
+              <div class="text-sm text-slate-600 mt-1">
+                A network that keeps students moving forward.
+              </div>
+            </div>
+          </div>
+
+          <div class="fade-up mt-8 grid gap-6 lg:grid-cols-2">
+            <!-- FAQ -->
+            <div
+              class="bg-slate-50 border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift transition"
+            >
+              <h3 class="text-xl font-extrabold text-darkBase">Quick FAQ</h3>
+              <div class="mt-4 space-y-3 text-sm">
+                <details
+                  class="group bg-white border border-slate-200 rounded-2xl p-4 shadow-soft"
+                >
+                  <summary
+                    class="cursor-pointer font-semibold text-darkBase flex items-center justify-between"
+                  >
+                    Who can apply?
+                    <span
+                      class="text-slate-400 group-open:rotate-180 transition"
+                      >⌄</span
+                    >
+                  </summary>
+                  <p class="text-slate-600 mt-2 leading-relaxed">
+                    Students in the Class of 2026 who meet eligibility
+                    requirements listed on the application page.
+                  </p>
+                </details>
+
+                <details
+                  class="group bg-white border border-slate-200 rounded-2xl p-4 shadow-soft"
+                >
+                  <summary
+                    class="cursor-pointer font-semibold text-darkBase flex items-center justify-between"
+                  >
+                    What documents are needed?
+                    <span
+                      class="text-slate-400 group-open:rotate-180 transition"
+                      >⌄</span
+                    >
+                  </summary>
+                  <p class="text-slate-600 mt-2 leading-relaxed">
+                    Typically: application form, personal statement, transcript
+                    (or grades), and one recommendation.
+                  </p>
+                </details>
+
+                <details
+                  class="group bg-white border border-slate-200 rounded-2xl p-4 shadow-soft"
+                >
+                  <summary
+                    class="cursor-pointer font-semibold text-darkBase flex items-center justify-between"
+                  >
+                    How are recipients selected?
+                    <span
+                      class="text-slate-400 group-open:rotate-180 transition"
+                      >⌄</span
+                    >
+                  </summary>
+                  <p class="text-slate-600 mt-2 leading-relaxed">
+                    A review panel uses a rubric scoring academics, need,
+                    leadership, service, and goals.
+                  </p>
+                </details>
+              </div>
+            </div>
+
+            <!-- CTA -->
+            <div
+              class="bg-gradient-to-br from-darkBase to-slate-900 border border-white/10 rounded-3xl p-6 shadow-lift text-white relative overflow-hidden"
+            >
+              <div
+                class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-primaryBlue/20 blur-3xl"
+              ></div>
+              <div
+                class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-primaryGreen/20 blur-3xl"
+              ></div>
+
+              <h3 class="text-xl font-extrabold">Ready to Apply?</h3>
+              <p class="text-white/75 mt-2 leading-relaxed">
+                Start your scholarship application and upload the required form.
+                If you need help, contact us—we respond quickly.
+              </p>
+
+              <div class="mt-5 flex flex-col sm:flex-row gap-3">
+                <a
+                  href="apply.html"
+                  class="inline-flex items-center justify-center gap-2 bg-primaryGreen text-darkBase font-semibold px-6 py-3 rounded-full shadow-soft hover:shadow-glowG hover:bg-emerald-500 transition"
+                >
+                  Apply Now <span>→</span>
+                </a>
+                <a
+                  href="#contact"
+                  class="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/15 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/15 transition"
+                >
+                  Contact Us
+                </a>
+              </div>
+
+              <div class="mt-5 text-xs text-white/60">
+                Tip: Use a strong personal statement—your goals, challenges, and
+                impact matter.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="py-14 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4">
+          <div class="fade-up">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-darkBase">
+              Contact Information
+            </h2>
+            <p class="text-slate-600 mt-2 max-w-2xl">
+              Reach out for application help, eligibility questions, or
+              partnership opportunities.
+            </p>
+          </div>
+
+          <div class="fade-up mt-8 grid gap-6 md:grid-cols-3 text-sm">
+            <div
+              class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <h3 class="font-extrabold text-darkBase mb-2">Mailing Address</h3>
+              <p class="text-slate-700 leading-relaxed">
+                Future Scholars Foundation<br />
+                123 Greenway Avenue<br />
+                Springfield, USA
+              </p>
+            </div>
+
+            <div
+              class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <h3 class="font-extrabold text-darkBase mb-2">Email & Phone</h3>
+              <p class="text-slate-700">
+                Email:
+                <a
+                  href="mailto:info@futurescholars2026.org"
+                  class="text-primaryBlue font-semibold hover:underline"
+                >
+                  info@futurescholars2026.org
+                </a>
+              </p>
+              <p class="text-slate-700 mt-2">
+                Phone:
+                <a
+                  href="tel:+11234567890"
+                  class="text-primaryBlue font-semibold hover:underline"
+                >
+                  +1 (123) 456-7890
+                </a>
+              </p>
+
+              <div
+                class="mt-4 p-4 rounded-2xl bg-slate-50 border border-slate-200"
+              >
+                <div class="font-semibold text-darkBase">Response Time</div>
+                <div class="text-slate-600 text-xs mt-1">
+                  Usually within 24–48 hours (business days).
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-white border border-slate-200 rounded-3xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition"
+            >
+              <h3 class="font-extrabold text-darkBase mb-2">Office Hours</h3>
+              <p class="text-slate-700 leading-relaxed">
+                Monday – Friday: 9:00 AM – 5:00 PM<br />
+                Closed on weekends and holidays
+              </p>
+              <div class="mt-4 flex gap-2">
+                <a
+                  href="#"
+                  class="flex-1 text-center px-4 py-2 rounded-full bg-primaryBlue text-white font-semibold shadow-soft hover:bg-blue-700 hover:shadow-glowB transition"
+                >
+                  Directions
+                </a>
+                <a
+                  href="apply.html"
+                  class="flex-1 text-center px-4 py-2 rounded-full bg-primaryGreen text-darkBase font-semibold shadow-soft hover:bg-emerald-500 hover:shadow-glowG transition"
+                >
+                  Apply
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Back to top button -->
+    <button
+      id="backToTop"
+      class="hidden fixed bottom-5 right-5 bg-primaryBlue text-white rounded-full px-4 py-2 text-sm shadow-lift hover:bg-blue-700 hover:-translate-y-0.5 transition"
+      aria-label="Back to top"
+    >
+      ↑ Top
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-darkBase text-slate-300 text-xs py-6">
+      <div class="max-w-6xl mx-auto px-4 text-center space-y-2">
+        <p class="text-white/70">
+          &copy; <span id="year"></span> Future Scholars Foundation. All rights
+          reserved.
+        </p>
+        <p class="text-white/45">
+          Built to support students with access, guidance, and opportunity.
+        </p>
       </div>
-    </section>
-  </main>
+    </footer>
 
-  <!-- Back to top button -->
-  <button
-    id="backToTop"
-    class="hidden fixed bottom-5 right-5 bg-primaryBlue text-white rounded-full px-4 py-2 text-sm shadow-lift hover:bg-blue-700 hover:-translate-y-0.5 transition"
-    aria-label="Back to top"
-  >
-    ↑ Top
-  </button>
+    <script src="script.js"></script>
 
-  <!-- Footer -->
-  <footer class="bg-darkBase text-slate-300 text-xs py-6">
-    <div class="max-w-6xl mx-auto px-4 text-center space-y-2">
-      <p class="text-white/70">
-        &copy; <span id="year"></span> Future Scholars Foundation. All rights reserved.
-      </p>
-      <p class="text-white/45">
-        Built to support students with access, guidance, and opportunity.
-      </p>
-    </div>
-  </footer>
+    <script>
+      // Simple reveal on scroll (works with Tailwind CDN)
+      const revealItems = document.querySelectorAll(".fade-up");
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("show");
+          });
+        },
+        { threshold: 0.12 }
+      );
 
-  <script src="script.js"></script>
-
-  <script>
-    // Simple reveal on scroll (works with Tailwind CDN)
-    const revealItems = document.querySelectorAll(".fade-up");
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("show");
-      });
-    }, { threshold: 0.12 });
-
-    revealItems.forEach((el) => revealObserver.observe(el));
-  </script>
-</body>
+      revealItems.forEach((el) => revealObserver.observe(el));
+    </script>
+  </body>
 </html>
